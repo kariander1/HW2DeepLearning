@@ -133,21 +133,20 @@ This model's performance highlights the effectiveness of dropout in recurrent ne
 
 ### Comparison
 
-| Model                       | Train Accuracy | Test Accuracy |
-|-----------------------------|----------------|---------------|
-| LSTM without Dropout              | 93.71%         | 89.15%        |
-| LSTM with Dropout         | 92.21%         | 89.96%        |
-| GRU without Dropout | 95.57%     | 91.35%        |
-| GRU with Dropout    | 90.80%         | 88.45%        |
+| Model                       | Train Perplexity | Validation Perplexity | Test Perplexity |
+|-----------------------------|----------------|---------------|---------------|
+| LSTM without Dropout              | 46.00         | 101.456        |  97.13|
+| LSTM with Dropout         | 59.55         | 81.02        |78.05|
+| GRU without Dropout | 59.16     | 106.86        | 103.56 |
+| GRU with Dropout    | 59.16         | 84.198        |  81.60 |
 
 ## References
 - **Recurrent Neural Network Regularization by Zaremba et al. (2014)**:
   - Paper link: [Recurrent Neural Network Regularization (arxiv.org)](https://arxiv.org/abs/1409.2329)
+  - Paper link: [Long Short-Term Memory (LSTM) (scholarpedia.org)](http://www.scholarpedia.org/article/Long_Short-Term_Memory)
+  - Paper link: [Neural Machine Translation by Jointly Learning to Align and Translate (arxiv.org)](https://arxiv.org/abs/1409.0473)
+
 - **GitHub Repositories**:
   - [ahmetumutdurmus/zaremba](https://github.com/ahmetumutdurmus/zaremba)
-  - [rajwanraz/Recurrent-Neural-network-regularization](https://github.com/rajwanraz/Recurrent-Neural-network-regularization)
-  - [davide-belli/nlp-RNN-pytorch](https://github.com/davide-belli/nlp-RNN-pytorch)
 
-## Acknowledgements
-This implementation is inspired by the works of many researchers and developers. Special thanks to the authors of the original paper and the contributors of the referenced GitHub repositories.
 
