@@ -9,14 +9,21 @@ tokenizer = get_tokenizer('basic_english')
 
 # Section 1: Load and Visualize the Penn Tree Bank Dataset
 def _load_data(file_path):
+    data = []
     with open(file_path, 'r') as f:
-        return f.read().split()
+        for line in f:
+            line = line.strip()
+            if line:  # ensure it's not an empty line
+                sentence = f"<sos> {line} <eos>" # Add <sos> and <eos> tokens explicitly
+                data.extend(sentence.split())
+    return data
     
 def _yield_tokens(data_iter):
     for text in data_iter:
         yield tokenizer(text)
 
 def _data_process(raw_text_iter, vocab):
+    # Item -> tokenizer token -> vocabulary index
     data = [torch.tensor([vocab[token] for token in tokenizer(item)], dtype=torch.long) for item in raw_text_iter]
     return torch.cat(tuple(filter(lambda t: t.numel() > 0, data)))
 
@@ -36,7 +43,8 @@ def create_penn_tree_bank_dataset(data_dir, batch_size, device):
     valid_data = _load_data(valid_file)
     test_data = _load_data(test_file)
 
-    vocab = build_vocab_from_iterator(_yield_tokens(train_data), specials=['<unk>', '<pad>', '<eos>'])
+    # Create vocabulary
+    vocab = build_vocab_from_iterator(_yield_tokens(train_data+valid_data+test_data))
     vocab.set_default_index(vocab['<unk>'])
     
     train_data = _data_process(train_data, vocab).to(device)
